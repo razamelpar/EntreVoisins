@@ -19,6 +19,7 @@ import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,14 +28,23 @@ public class NeighbourFragment extends Fragment {
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
+    private String page;
+    private static final String ONGLET = "page";
 
 
     /**
      * Create and return a new instance
      * @return @{@link NeighbourFragment}
+     * @param page
      */
-    public static NeighbourFragment newInstance() {
+    public static NeighbourFragment newInstance(String page) {
         NeighbourFragment fragment = new NeighbourFragment();
+
+        /** nommer fragment ONGLET page **/
+        Bundle args = new Bundle();
+        args.putString(ONGLET, page);
+        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -52,16 +62,33 @@ public class NeighbourFragment extends Fragment {
         mRecyclerView = (RecyclerView) view;
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+
+        /** recuperation du nom de l'onglet **/
+        page = getArguments().getString(ONGLET);
+
         initList();
         return view;
     }
 
     /**
      * Init the List of neighbours
+     * creation de ma deuxieme liste pour les voisins mis en favoris
      */
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        if (page == "favoris"){
+            List<Neighbour> favoris_Neighbours = new ArrayList<>();
+            for (Neighbour liste : mNeighbours) {
+                if (liste.isFavoris())
+                    favoris_Neighbours.add(liste);
+            }
+            mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(favoris_Neighbours));
+            }
+
+        else {
+                mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+
+            }
     }
 
     @Override

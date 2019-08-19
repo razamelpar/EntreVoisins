@@ -2,4 +2,6 @@
     <string name="app_name">Entrevoisins</string>
     <string name="tab_neighbour_title">My neighbours</string>
     <string name="tab_favorites_title">Favorites</string>
+    <string name="title_activity_profil_neighbour">Profil_Neighbour_Activity</string>
+    <string name="title_activity_profil">Profil</string>
 </resources>
