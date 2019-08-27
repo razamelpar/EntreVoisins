@@ -111,7 +111,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_toEndOf="@id/imgAdresse"
                 android:padding="4dp"
-                android:text="Nice"
+                tools:text="@tools:sample/cities"
                 android:textSize="12sp" />
 
             <ImageView
@@ -135,7 +135,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_toEndOf="@id/imgTel"
                 android:padding="4dp"
-                android:text="00.00.00.00.00"
+                tools:text="@tools:sample/us_phones"
                 android:textSize="16sp" />
 
             <ImageView
@@ -159,7 +159,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_toEndOf="@id/imgWeb"
                 android:padding="4dp"
-                android:text="http://machin.site.fr"
+                android:text="http://www.profile.site.fr/"
                 android:textSize="12sp" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
@@ -195,9 +195,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:padding="4dp"
-                android:text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies,
-purus lectus malesuada libero, sit amet commodo magna eros quis urna.Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci."
+                tools:text="@tools:sample/lorem"
                 android:textSize="12sp" />
         </LinearLayout>
+
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

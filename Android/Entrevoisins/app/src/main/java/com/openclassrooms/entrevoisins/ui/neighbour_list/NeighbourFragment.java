@@ -27,6 +27,7 @@ public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
+    private List<Neighbour> favoris_Neighbours = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private String page;
     private static final String ONGLET = "page";
@@ -77,7 +78,7 @@ public class NeighbourFragment extends Fragment {
     private void initList() {
         mNeighbours = mApiService.getNeighbours();
         if (page == "favoris"){
-            List<Neighbour> favoris_Neighbours = new ArrayList<>();
+
             for (Neighbour liste : mNeighbours) {
                 if (liste.isFavoris())
                     favoris_Neighbours.add(liste);
@@ -91,10 +92,13 @@ public class NeighbourFragment extends Fragment {
             }
     }
 
+    /** je clear la liste avant de la charger pour eviter la multiplication d'item **/
     @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        favoris_Neighbours.clear();
+        initList();
     }
 
     @Override

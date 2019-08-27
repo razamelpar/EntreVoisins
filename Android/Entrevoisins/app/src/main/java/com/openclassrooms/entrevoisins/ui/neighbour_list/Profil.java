@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
@@ -23,6 +24,9 @@ public class Profil extends AppCompatActivity {
     ImageView imgProfil;
     TextView txtProfil;
     TextView txtTitre;
+    TextView txtWeb;
+    TextView txtAdresse;
+    TextView txtTel;
     ImageButton retour_Button;
     FloatingActionButton favoris_Button;
     Neighbour profil;
@@ -37,14 +41,20 @@ public class Profil extends AppCompatActivity {
         imgProfil = (ImageView)findViewById(R.id.imgProfil);
         txtProfil = (TextView)findViewById(R.id.txtProfil);
         txtTitre = (TextView)findViewById(R.id.txtTitre);
+        txtWeb = (TextView)findViewById(R.id.txtWeb);
+        txtAdresse = (TextView) findViewById(R.id.txtAdresse);
+        txtTel = (TextView) findViewById(R.id.txtTel);
 
         Intent intent = getIntent();
         Integer profilID = intent.getIntExtra("profil", -1);
         profil = DummyNeighbourApiService.getProfil(this, profilID);
 
-        imgProfil.setImageURI(Uri.parse(profil.getAvatarUrl()));
+        Glide.with(this).load(profil.getAvatarUrl()).into(imgProfil);
+        /** imgProfil.setImageURI(profil.getAvatarUrl()); **/
         txtProfil.setText(profil.getName());
         txtTitre.setText(profil.getName());
+        txtWeb.setText(txtWeb.getText() + profil.getName());
+
 
         retour_Button = (ImageButton)findViewById(R.id.retourButton);
         retour_Button.setOnClickListener(new View.OnClickListener() {
@@ -56,14 +66,23 @@ public class Profil extends AppCompatActivity {
 
 
         favoris_Button = (FloatingActionButton)findViewById(R.id.favorisButton);
+        if (profil.isFavoris() == false){
+            favoris_Button.setImageResource(R.drawable.ic_star_white_24dp);
+        }
+        else favoris_Button.setImageResource(R.drawable.ic_star_gold_24dp);
+
         favoris_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (profil.isFavoris() == false){
                     profil.setFavoris(true);
+                    favoris_Button.setImageResource(R.drawable.ic_star_gold_24dp);
                 }
-                else profil.setFavoris(false);
+                else if (profil.isFavoris() == true) {
+                    profil.setFavoris(false);
+                    favoris_Button.setImageResource(R.drawable.ic_star_white_24dp);
+                }
 
 
             }
