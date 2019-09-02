@@ -40,4 +40,9 @@ public class NeighbourServiceTest {
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
+
+    @Test
+    public void setFavorisSuccess(){
+        // TODO: 02/09/2019 a finir test mise en favoris
+    }
 }

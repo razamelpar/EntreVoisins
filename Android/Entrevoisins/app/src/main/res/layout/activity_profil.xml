@@ -111,8 +111,8 @@
                 android:layout_marginBottom="4dp"
                 android:layout_toEndOf="@id/imgAdresse"
                 android:padding="4dp"
-                tools:text="@tools:sample/cities"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:text="Paris" />
 
             <ImageView
                 android:id="@+id/imgTel"
@@ -135,8 +135,8 @@
                 android:layout_marginBottom="4dp"
                 android:layout_toEndOf="@id/imgTel"
                 android:padding="4dp"
-                tools:text="@tools:sample/us_phones"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:text="+33 6 86 57 90 14" />
 
             <ImageView
                 android:id="@+id/imgWeb"
@@ -195,8 +195,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:padding="4dp"
-                tools:text="@tools:sample/lorem"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat erat non hendrerit dapibus. Sed semper vel ipsum non vehicula. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer dignissim, tortor vel pretium pellentesque, enim ligula suscipit mauris, at scelerisque augue lacus quis nunc. In malesuada." />
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
