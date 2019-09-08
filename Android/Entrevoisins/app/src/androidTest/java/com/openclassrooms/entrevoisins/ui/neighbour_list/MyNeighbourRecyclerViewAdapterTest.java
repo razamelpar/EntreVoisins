@@ -29,7 +29,9 @@ import static android.support.test.espresso.action.ViewActions.swipeLeft;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
@@ -69,14 +71,9 @@ public class MyNeighbourRecyclerViewAdapterTest {
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(actionOnItemAtPosition(0, click()));
         onView(withId(R.id.favorisButton)).perform(click());
         pressBack();
-        onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(actionOnItemAtPosition(2, click()));
-        onView(withId(R.id.favorisButton)).perform(click());
-        pressBack();
-        onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(actionOnItemAtPosition(3, click()));
-        onView(withId(R.id.favorisButton)).perform(click());
-        pressBack();
         swipeLeft();
-        /** onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(matches(mService.getNeighbours())); **/
+        onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.txtProfil)).check(matches(withText("Caroline")));
     }
     /** swip left**/
 
