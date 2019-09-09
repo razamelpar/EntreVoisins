@@ -50,7 +50,7 @@ public class Profil extends AppCompatActivity {
         profil = DummyNeighbourApiService.getProfil(this, profilID);
 
         Glide.with(this).load(profil.getAvatarUrl()).into(imgProfil);
-        /** imgProfil.setImageURI(profil.getAvatarUrl()); **/
+
         txtProfil.setText(profil.getName());
         txtTitre.setText(profil.getName());
         txtWeb.setText(txtWeb.getText() + profil.getName());

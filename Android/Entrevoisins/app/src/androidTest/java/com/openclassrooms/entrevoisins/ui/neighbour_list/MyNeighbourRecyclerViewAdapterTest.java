@@ -59,6 +59,7 @@ public class MyNeighbourRecyclerViewAdapterTest {
     }
 
     @Test
+    /** test affichage de profil **/
     public void profilIsPopulated() throws Exception
     {
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(actionOnItemAtPosition(0, click()));
@@ -66,16 +67,22 @@ public class MyNeighbourRecyclerViewAdapterTest {
     }
 
     @Test
+    /** test mise en favoris des profil **/
     public void FavorisListIsPopulated() throws Exception
     {
+        //click sur un profil
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(actionOnItemAtPosition(0, click()));
+        // click sur le bouton favoris dans la fiche profil
         onView(withId(R.id.favorisButton)).perform(click());
+        // retour en arriere
         pressBack();
+        // bascule sur l'onglet favoris
         swipeLeft();
+        // click sur le profil depuis l'onglet favoris
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(actionOnItemAtPosition(0, click()));
+        // on verifie que le nom du profil favoris est bien le meme que celui choisi dans la liste des voisins
         onView(withId(R.id.txtProfil)).check(matches(withText("Caroline")));
     }
-    /** swip left**/
 
     @Before
     public void setUp() {
