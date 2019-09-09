@@ -1,6 +1,6 @@
 # EntreVoisins
 
-<h3>projet 3 Prép'Android</h3>
-<p>Telecharger le projet</p>
-<p>Importer dans android stuidio</p>
-<p>Build le projet</p>
+**Projet 3 Prép'Android**  
+Telecharger le projet  
+Importer dans android studio  
+Build le projet
