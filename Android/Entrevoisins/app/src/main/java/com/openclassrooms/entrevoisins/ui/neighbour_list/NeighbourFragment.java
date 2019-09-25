@@ -27,7 +27,7 @@ public class NeighbourFragment extends Fragment {
 
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
-    private List<Neighbour> favoris_Neighbours = new ArrayList<>();
+    private List<Neighbour> mFavorisNeigbours;
     private RecyclerView mRecyclerView;
     private String page;
     private static final String ONGLET = "page";
@@ -73,17 +73,18 @@ public class NeighbourFragment extends Fragment {
 
     /**
      * Init the List of neighbours
-     * creation de ma deuxieme liste pour les voisins mis en favoris
+     * utilisation de la methode de services getFavorisNeigbours
+     * pour la generation de liste de favoris a jours
      */
     private void initList() {
+
         mNeighbours = mApiService.getNeighbours();
+
+        mFavorisNeigbours = mApiService.getFavorisNeighbours();
+
         if (page == "favoris"){
 
-            for (Neighbour liste : mNeighbours) {
-                if (liste.isFavoris())
-                    favoris_Neighbours.add(liste);
-            }
-            mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(favoris_Neighbours));
+            mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mFavorisNeigbours));
             }
 
         else {
@@ -92,12 +93,10 @@ public class NeighbourFragment extends Fragment {
             }
     }
 
-    /** je clear la liste avant de la charger pour eviter la multiplication d'item **/
     @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-        favoris_Neighbours.clear();
         initList();
     }
 
@@ -114,7 +113,6 @@ public class NeighbourFragment extends Fragment {
     @Subscribe
     public void onDeleteNeighbour(DeleteNeighbourEvent event) {
         mApiService.deleteNeighbour(event.neighbour);
-        favoris_Neighbours.clear();
         initList();
     }
 }

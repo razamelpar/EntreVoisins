@@ -51,6 +51,7 @@ public class MyNeighbourRecyclerViewAdapterTest {
     private DummyNeighbourApiService mDummyNeighbourApiService;
 
     @Test
+    /** test item clicable dans la liste de voisins **/
     public void onBindViewHolder() throws Exception
     {
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(actionOnItemAtPosition(0, click()));

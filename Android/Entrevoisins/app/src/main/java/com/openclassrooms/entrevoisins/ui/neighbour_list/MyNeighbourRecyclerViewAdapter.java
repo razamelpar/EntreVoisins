@@ -62,9 +62,15 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
         holder.caseProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Profil.class);
 
-                intent.putExtra("profil", neighbour.getId());
+                /**
+                 * creation de l'intent avec l'instance neigbour de l'objet Neigbour parcelable
+                 * qui est transmis avec la clef "profil"
+                 */
+
+                Intent intent = new Intent(v.getContext(), ProfilActivity.class);
+
+                intent.putExtra("profil", neighbour);
 
                 v.getContext().startActivity(intent);
             }

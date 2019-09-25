@@ -15,12 +15,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.DummyNeighbourApiService;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
-public class Profil extends AppCompatActivity {
 
+public class ProfilActivity extends AppCompatActivity {
+
+    private NeighbourApiService mApiService;
     ImageView imgProfil;
     TextView txtProfil;
     TextView txtTitre;
@@ -45,9 +48,8 @@ public class Profil extends AppCompatActivity {
         txtAdresse = (TextView) findViewById(R.id.txtAdresse);
         txtTel = (TextView) findViewById(R.id.txtTel);
 
-        Intent intent = getIntent();
-        Integer profilID = intent.getIntExtra("profil", -1);
-        profil = DummyNeighbourApiService.getProfil(this, profilID);
+        mApiService = DI.getNeighbourApiService();
+        profil = getIntent().getParcelableExtra("profil");
 
         Glide.with(this).load(profil.getAvatarUrl()).into(imgProfil);
 
@@ -58,6 +60,7 @@ public class Profil extends AppCompatActivity {
 
         retour_Button = (ImageButton)findViewById(R.id.retourButton);
         retour_Button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 finish();
@@ -72,15 +75,20 @@ public class Profil extends AppCompatActivity {
         else favoris_Button.setImageResource(R.drawable.ic_star_gold_24dp);
 
         favoris_Button.setOnClickListener(new View.OnClickListener() {
+
+            /**
+             * utilisation de ma methode de services changeFavoris
+             * @param v
+             */
             @Override
             public void onClick(View v) {
 
                 if (profil.isFavoris() == false){
-                    profil.setFavoris(true);
+                    mApiService.changeFavoris(profil);
                     favoris_Button.setImageResource(R.drawable.ic_star_gold_24dp);
                 }
                 else if (profil.isFavoris() == true) {
-                    profil.setFavoris(false);
+                    mApiService.changeFavoris(profil);
                     favoris_Button.setImageResource(R.drawable.ic_star_white_24dp);
                 }
 

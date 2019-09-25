@@ -1,11 +1,19 @@
 package com.openclassrooms.entrevoisins.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Objects;
 
 /**
  * Model object representing a Neighbour
  */
-public class Neighbour {
+
+/**
+ * l'objet implemente parcelable pour me permettre de le transmettre
+ * via un intente entre mes activity
+ */
+public class Neighbour implements Parcelable {
 
     /** Identifier */
     private Integer id;
@@ -75,8 +83,39 @@ public class Neighbour {
         return Objects.equals(id, neighbour.id);
     }
 
+    public static final Parcelable.Creator<Neighbour> CREATOR = new Parcelable.Creator<Neighbour>() {
+        public Neighbour createFromParcel(Parcel in) {
+            return new Neighbour(in);
+        }
+
+        public Neighbour[] newArray(int size) {
+            return new Neighbour[size];
+        }
+    };
+
+    private Neighbour(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        avatarUrl = in.readString();
+        favoris = in.readByte() != 0;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(avatarUrl);
+        dest.writeByte((byte) (favoris ? 1 : 0));
     }
 }

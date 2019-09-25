@@ -59,6 +59,7 @@ public class NeighboursListTest {
 
     /**
      * When we delete an item, the item is no more shown
+     * correction d'une erreur sur le test avec la methode 'allOf'
      */
     @Test
     public void myNeighboursList_deleteAction_shouldRemoveItem() {
