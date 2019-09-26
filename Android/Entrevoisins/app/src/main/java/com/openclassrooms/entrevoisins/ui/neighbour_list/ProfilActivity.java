@@ -48,6 +48,7 @@ public class ProfilActivity extends AppCompatActivity {
         txtAdresse = (TextView) findViewById(R.id.txtAdresse);
         txtTel = (TextView) findViewById(R.id.txtTel);
 
+        /** recuperation de mon objet **/
         mApiService = DI.getNeighbourApiService();
         profil = getIntent().getParcelableExtra("profil");
 
